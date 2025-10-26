@@ -13,13 +13,14 @@
                 extend: {
                     colors: {
                         'primary-red': '#C90000',
-                        'primary-green': '#00FF00', /* New color for the digital rain */
+                        'primary-green': '#00FF00', 
                         'dark-bg': '#101010',
                         'light-text': '#E0E0E0',
                         'accent-gray': '#333333',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        mono: ['Consolas', 'Monaco', 'monospace'], // Added monospace font for the rain
                     },
                     // Custom keyframes for effects
                     keyframes: {
@@ -27,14 +28,15 @@
                             '0%, 100%': { 'box-shadow': '0 0 10px rgba(201, 0, 0, 0.5), 0 0 5px rgba(201, 0, 0, 0.3)' },
                             '50%': { 'box-shadow': '0 0 15px rgba(201, 0, 0, 0.8), 0 0 8px rgba(201, 0, 0, 0.5)' },
                         },
+                        // Simplified falling animation for JS control
                         'matrix-fall': {
                             '0%': { transform: 'translateY(-100%)', opacity: '0.1' },
-                            '100%': { transform: 'translateY(100%)', opacity: '0.3' },
+                            '100%': { transform: 'translateY(150%)', opacity: '0.3' },
                         }
                     },
                     animation: {
                         'button-glow': 'glow 3s ease-in-out infinite',
-                        'matrix-fall': 'matrix-fall 15s linear infinite',
+                        // Note: matrix-fall animation is now applied dynamically by JS
                     }
                 }
             }
@@ -51,42 +53,18 @@
             overflow: hidden;
         }
 
-        /* The actual digital rain element */
-        .digital-rain {
+        /* Styling for the dynamically created rain elements */
+        .digital-rain-drop {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Prevents interference with clicks */
-            z-index: 1;
-            /* Create multiple, randomly positioned shadows for the procedural look */
+            white-space: nowrap; /* Keep the string from wrapping */
             text-shadow: 0 0 5px #00FF00;
-            filter: blur(1.5px); /* Subtle blur for the floating effect */
-            
-            /* Apply the animation to the code block */
-            animation: matrix-fall 15s linear infinite;
+            filter: blur(1.5px);
+            color: #00FF00;
+            opacity: 0.1;
+            /* Tailwind's utility class for the falling animation will be applied dynamically */
         }
-
-        /* Create multiple layers of rain with different delays/speeds */
-        .digital-rain:nth-child(2) {
-            animation-delay: -5s;
-            animation-duration: 18s;
-            left: 20%;
-        }
-
-        .digital-rain:nth-child(3) {
-            animation-delay: -10s;
-            animation-duration: 10s;
-            left: 50%;
-        }
-
-        .digital-rain:nth-child(4) {
-            animation-delay: -7s;
-            animation-duration: 13s;
-            left: 80%;
-        }
-
+        
         /* Ensure the hero content is above the rain effect */
         .hero-content {
             position: relative;
@@ -126,13 +104,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Now with the digital background effect) -->
+    <!-- Hero Section (Now with the digital background effect controlled by JS) -->
     <header class="py-16 md:py-24 bg-black shadow-2xl shadow-primary-red/20 border-b border-primary-red/50 hero-bg-effect">
-        <!-- Digital Rain Effect Elements -->
-        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">0110101010011001101001101010100101010110100110101010011010010101011010011010101001101001101010100110100110101010011010101001100110100110101010010101011010011010101001101001010101101001101010100110100110101010011010011010101001</div>
-        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">10101001101001101010100110100110101010011010011010101001101001101010100110101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010</div>
-        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">0110101010011001101001101010100101010110100110101010011010010101011010011010101001101001101010100110100110101010011010101001100110100110101010010101011010011010101001101001010101101001101010100110100110101010011010011010101001</div>
-        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">1010100110100110101010011010011010101001101001101010100110100110101010011010100110100110101010011010011010101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010</div>
+        
+        <!-- Container for the JavaScript-generated digital rain -->
+        <div id="rain-container" class="absolute inset-0 z-0 pointer-events-none font-mono text-primary-green"></div>
         
         <!-- Hero Content (above the effect) -->
         <div class="container mx-auto px-6 text-center hero-content">
@@ -245,6 +221,58 @@
             <p class="mt-2">Designed for GitHub Pages Deployment.</p>
         </div>
     </footer>
+
+    <!-- JavaScript for Digital Rain Effect and Navbar Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rainContainer = document.getElementById('rain-container');
+            const characterPool = '01'; // Simple binary look
+            const dropCount = 70; // Number of rain trails
+            
+            // Function to generate a random string of 0s and 1s
+            const generateBinaryString = (length) => {
+                let str = '';
+                for (let i = 0; i < length; i++) {
+                    str += characterPool[Math.floor(Math.random() * characterPool.length)];
+                }
+                return str;
+            };
+
+            // Function to create and position one rain drop
+            const createRainDrop = () => {
+                const drop = document.createElement('span');
+                
+                // Set the binary content
+                drop.textContent = generateBinaryString(Math.floor(Math.random() * 15) + 8); // Length 8 to 22
+
+                // Add base styling class
+                drop.classList.add('digital-rain-drop', 'animate-[matrix-fall]'); 
+
+                // Set random size (16px to 32px)
+                const size = Math.floor(Math.random() * 16) + 16;
+                drop.style.fontSize = `${size}px`;
+
+                // Set random horizontal position (0% to 100%)
+                drop.style.left = `${Math.random() * 100}%`;
+
+                // Set random animation duration (6s to 18s) for speed variation
+                drop.style.animationDuration = `${Math.random() * 12 + 6}s`;
+
+                // Set random animation delay (0s to -10s) so they start staggered
+                drop.style.animationDelay = `-${Math.random() * 10}s`;
+
+                // Set random opacity (0.05 to 0.25) for depth
+                drop.style.opacity = `${Math.random() * 0.2 + 0.05}`;
+
+                rainContainer.appendChild(drop);
+            };
+
+            // Generate all the rain drops
+            for (let i = 0; i < dropCount; i++) {
+                createRainDrop();
+            }
+        });
+    </script>
 
 </body>
 </html>
