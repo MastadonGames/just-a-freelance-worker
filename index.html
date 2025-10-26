@@ -1,3 +1,250 @@
-<html>
-<iframe src="https://mastadongamesgames.wixsite.com/mastadongamesstudio" fullscreen=true></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JFW: Just a Freelance Worker | Mastadon Games Studio</title>
+    <!-- Load Tailwind CSS from CDN for a modern, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Tailwind Configuration for the dark, futuristic theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-red': '#C90000',
+                        'primary-green': '#00FF00', /* New color for the digital rain */
+                        'dark-bg': '#101010',
+                        'light-text': '#E0E0E0',
+                        'accent-gray': '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    // Custom keyframes for effects
+                    keyframes: {
+                        'glow': {
+                            '0%, 100%': { 'box-shadow': '0 0 10px rgba(201, 0, 0, 0.5), 0 0 5px rgba(201, 0, 0, 0.3)' },
+                            '50%': { 'box-shadow': '0 0 15px rgba(201, 0, 0, 0.8), 0 0 8px rgba(201, 0, 0, 0.5)' },
+                        },
+                        'matrix-fall': {
+                            '0%': { transform: 'translateY(-100%)', opacity: '0.1' },
+                            '100%': { transform: 'translateY(100%)', opacity: '0.3' },
+                        }
+                    },
+                    animation: {
+                        'button-glow': 'glow 3s ease-in-out infinite',
+                        'matrix-fall': 'matrix-fall 15s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Set Inter as the default font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Custom Style for the procedural background -->
+    <style>
+        /* Base style for the hero to be a container for the effect */
+        .hero-bg-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The actual digital rain element */
+        .digital-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Prevents interference with clicks */
+            z-index: 1;
+            /* Create multiple, randomly positioned shadows for the procedural look */
+            text-shadow: 0 0 5px #00FF00;
+            filter: blur(1.5px); /* Subtle blur for the floating effect */
+            
+            /* Apply the animation to the code block */
+            animation: matrix-fall 15s linear infinite;
+        }
+
+        /* Create multiple layers of rain with different delays/speeds */
+        .digital-rain:nth-child(2) {
+            animation-delay: -5s;
+            animation-duration: 18s;
+            left: 20%;
+        }
+
+        .digital-rain:nth-child(3) {
+            animation-delay: -10s;
+            animation-duration: 10s;
+            left: 50%;
+        }
+
+        .digital-rain:nth-child(4) {
+            animation-delay: -7s;
+            animation-duration: 13s;
+            left: 80%;
+        }
+
+        /* Ensure the hero content is above the rain effect */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-light-text font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-primary-red/50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo/Home Link -->
+            <a href="#" class="text-2xl font-extrabold tracking-widest text-light-text hover:text-primary-red transition duration-200">
+                <span class="text-primary-red">JFW</span>: Just a Freelance Worker
+            </a>
+            
+            <!-- Navigation Links (Hidden on small screens, shown as menu button) -->
+            <div class="hidden md:flex space-x-8 font-semibold">
+                <a href="#intro" class="text-light-text hover:text-primary-red transition duration-200">Synopsis</a>
+                <a href="#contract" class="text-light-text hover:text-primary-red transition duration-200">The Contract</a>
+                <a href="#media" class="text-light-text hover:text-primary-red transition duration-200">Media Intel</a>
+                <a href="#dev-info" class="text-light-text hover:text-primary-red transition duration-200">Dev Info</a>
+                <a href="#deploy" class="text-light-text hover:text-primary-red transition duration-200">Deploy</a>
+            </div>
+
+            <!-- Purchase Button (Visible on all screens) -->
+            <a href="#purchase-link-here" class="hidden md:block px-4 py-2 text-sm font-bold uppercase rounded-full bg-primary-red text-white hover:bg-red-700 transition duration-300">
+                Purchase
+            </a>
+            
+            <!-- Mobile Menu Icon (You'd need JavaScript to implement the toggle, but we include the placeholder here) -->
+            <button class="md:hidden text-light-text hover:text-primary-red">
+                <!-- Simple hamburger icon using SVG for completeness -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Now with the digital background effect) -->
+    <header class="py-16 md:py-24 bg-black shadow-2xl shadow-primary-red/20 border-b border-primary-red/50 hero-bg-effect">
+        <!-- Digital Rain Effect Elements -->
+        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">0110101010011001101001101010100101010110100110101010011010010101011010011010101001101001101010100110100110101010011010101001100110100110101010010101011010011010101001101001010101101001101010100110100110101010011010011010101001</div>
+        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">10101001101001101010100110100110101010011010011010101001101001101010100110101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010</div>
+        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">0110101010011001101001101010100101010110100110101010011010010101011010011010101001101001101010100110100110101010011010101001100110100110101010010101011010011010101001101001010101101001101010100110100110101010011010011010101001</div>
+        <div class="digital-rain text-primary-green text-opacity-10 text-9xl font-mono leading-none">1010100110100110101010011010011010101001101001101010100110100110101010011010100110100110101010011010011010101001101001101010100110100110101010011010011010101001101001101010100110100110101010011010</div>
+        
+        <!-- Hero Content (above the effect) -->
+        <div class="container mx-auto px-6 text-center hero-content">
+            <h1 class="text-7xl md:text-8xl font-extrabold tracking-widest text-primary-red mb-2">JFW</h1>
+            <p class="text-2xl md:text-3xl font-light italic text-gray-200">"Hired. Paid. Silenced."</p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <div class="max-w-4xl mx-auto space-y-12">
+
+            <!-- Introduction Section: The Shadow Economy -->
+            <section id="intro" class="border-b border-accent-gray pb-8 scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-4 text-primary-red">THE SHADOW ECONOMY</h2>
+                <p class="text-lg leading-relaxed text-justify mb-4">
+                    Welcome to the shadow economy. You are <strong>Just a Freelance Worker (JFW)</strong>—a ghost hired by the Department of War/Defense to do the jobs no one else can touch. From high-rise rooftops to crowded streets, your mission is simple: <strong>Eliminate the target, no witnesses, no trace.</strong>
+                </p>
+                <p class="text-lg leading-relaxed text-justify border-l-4 border-primary-red pl-4 italic bg-accent-gray/20 p-3 rounded">
+                    When the police or SWAT can't handle angry and armed gangs on building rooftops, you're the <strong>plan-B</strong>. Sometimes, you'll have to perform risky in-building takeouts.
+                </p>
+            </section>
+
+            <!-- The Contract Section: Features -->
+            <section id="contract" class="border-b border-accent-gray pb-8 scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6 text-primary-red">THE CONTRACT</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Game Description Card -->
+                    <div class="bg-accent-gray p-6 rounded-lg shadow-xl border border-primary-red/30">
+                        <h3 class="text-2xl font-semibold mb-3 text-gray-50">Gameplay Focus</h3>
+                        <p class="text-gray-300">
+                            <strong>JFW: Just a freelance worker</strong> is an intense <strong>first-person sniper/stealth simulator</strong> set in a <strong>procedural/random</strong> gritty, fog-shrouded city. Your primary tool is your precision rifle and your unwavering focus. You're not a soldier; you're an <strong>executor</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="space-y-4">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-primary-red mr-3 mt-1">&#x25B8;</span>
+                                <div><strong>High-Stakes Contracts:</strong> Take on government-contracted covert sniper missions to eliminate high-value targets and their armed henchmen.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-red mr-3 mt-1">&#x25B8;</span>
+                                <div><strong>Urban Battlefield:</strong> Master the rooftops and vantage points of a sprawling cityscape where visibility and distance are your greatest challenge.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-red mr-3 mt-1">&#x25B8;</span>
+                                <div><strong>One Shot, One Opportunity:</strong> Experience the tension of a single-shot opportunity and close-range pistol combat. Alerting enemies while in-doors is equal to <strong>suicide</strong>.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-red mr-3 mt-1">&#x25B8;</span>
+                                <div><strong>Adjustable Challenge:</strong> Customize your experience with in-game settings for audio, graphics, mouse sensitivity, and blood/gore.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Section -->
+            <section id="media" class="border-b border-accent-gray pb-8 scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6 text-primary-red text-center">MISSION INTEL | MEDIA</h2>
+                <div class="aspect-video bg-black/50 rounded-lg overflow-hidden shadow-2xl">
+                    <!-- Placeholder for the YouTube Embedded Video -->
+                    <iframe width="100%" height="100%" src="YOUR_YOUTUBE_TRAILER_EMBED_LINK_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <p class="text-center italic text-sm mt-3 text-gray-500">
+                    *IMPORTANT: Please replace the **YOUR_YOUTUBE_TRAILER_EMBED_LINK_HERE** source URL above with your actual YouTube embed link.*
+                </p>
+            </section>
+
+            <!-- Development Info -->
+            <section id="dev-info" class="border-b border-accent-gray pb-8 scroll-mt-20">
+                <h2 class="text-3xl font-bold mb-6 text-primary-red">DEVELOPMENT INFO</h2>
+                <dl class="grid grid-cols-2 gap-y-4 gap-x-8 text-lg">
+                    <dt class="font-semibold text-primary-red">Developed By:</dt>
+                    <dd class="text-gray-300">Mastadon Games Studio</dd>
+                    
+                    <dt class="font-semibold text-primary-red">Engine:</dt>
+                    <dd class="text-gray-300">Unity</dd>
+                    
+                    <dt class="font-semibold text-primary-red">Latest Update:</dt>
+                    <dd class="text-gray-300">10/24/2025</dd>
+                </dl>
+            </section>
+
+            <!-- Deploy / Call to Action -->
+            <section id="deploy" class="text-center pt-8 pb-12 scroll-mt-20">
+                <h2 class="text-4xl font-extrabold mb-6 text-gray-100">READY TO DEPLOY?</h2>
+                <p class="text-xl font-light mb-8 text-gray-300">
+                    Buy <span class="text-primary-red font-bold">JFW: Just a freelance worker</span> now and complete your first contract.
+                </p>
+                <a href="#purchase-link-here" 
+                   class="inline-block px-12 py-4 text-xl font-bold uppercase rounded-full tracking-widest 
+                          bg-primary-red text-white shadow-lg 
+                          hover:bg-red-700 transition duration-300 ease-in-out 
+                          animate-button-glow"
+                >
+                    PURCHASE ACCESS
+                </a>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-6 mt-12 border-t border-accent-gray">
+        <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Mastadon Games Studio. All Rights Reserved. | <span class="text-primary-red font-semibold">Project JFW.</span></p>
+            <p class="mt-2">Designed for GitHub Pages Deployment.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
